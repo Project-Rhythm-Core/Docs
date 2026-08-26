@@ -66,6 +66,7 @@ Each layer solves a different source of delay:
 | --- | --- |
 | `rust-core/src/audio/decoder.rs` | File → interleaved `f32` PCM |
 | `rust-core/src/audio/device.rs` | Stream configuration, channel mapping, resampling |
+| `rust-core/src/audio/mixer.rs` | Sample bank, voices, and the trigger queue |
 | `rust-core/src/audio/clock.rs` | `PlaybackClock` — all timing state, in atomics |
 | `rust-core/src/audio/engine.rs` | `AudioEngine` — owns the stream and its callback |
 | `rust-core/src/lib.rs` | N-API bindings and the global engine handle |
@@ -116,6 +117,7 @@ Taken on one Linux machine, playing a 44.1 kHz stereo track through the default 
 ## Read next
 
 - [[native-module]] — decoding, device negotiation, buffer sizing
+- [[mixer]] — keysounds, scheduled accompaniment, and voices
 - [[playback-clock]] — how the audible-time anchor is computed and smoothed
 - [[renderer-clock]] — the handshake, slewing, and periodic resync
 - [[latency-and-calibration]] — warm-up, output latency, and the manual offset

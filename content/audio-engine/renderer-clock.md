@@ -167,6 +167,29 @@ call. See [[latency-and-calibration]] for why that ordering is the whole point.
 > It calls through to the native `unload()`, which drops the engine singleton and
 > releases the device. The instance is not reusable afterwards without another `load()`.
 
+## Charts with no audio to follow
+
+Everything downstream of the clock — where notes are drawn, when they are judged, when
+they are written off — is a function of one number. A chart with no clock therefore does
+not play badly; it does not play at all. Notes sit motionless, and only the handful
+already on screen are reachable.
+
+That is exactly what a fully keysounded chart is: `AudioFilename: virtual`, no background
+track, and nothing for the clock to anchor to. So the clock is an interface with two
+implementations, and gameplay does not know which one it has:
+
+| Clock | Used when | Anchored to |
+| --- | --- | --- |
+| `AudioClock` | The chart has a background track | The audible position of the audio |
+| `SystemClock` | It does not | `performance.now()`, free-running |
+
+> [!caution] The fallback is a stopgap, not a design
+> Nothing keeps a free-running clock honest. It is correct only because there is no sound
+> to be out of step with — the moment the engine can mix a sample bank, a keysounded chart
+> has to be driven by the audio device like any other, because its samples have to land
+> where its notes say they do. Until then such charts are playable and silent, and the
+> overlay says so rather than pretending otherwise.
+
 ## Exposed diagnostics
 
 | Field | Meaning |

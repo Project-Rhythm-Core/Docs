@@ -10,6 +10,10 @@ one hard requirement: knowing, to the millisecond, which audio sample is playing
 - **[[audio-engine/index|Audio Engine]]** — the timing backbone. A native Rust audio
   module (cpal + Symphonia) driven from Electron, a playback clock anchored to audible
   time, and a renderer-side clock that costs nothing per frame.
+- **[[chart-format/index|Chart Format]]** — the one format the game reads, and how
+  osu!mania, BMS, o2jam and pop'n charts are converted into it at import time.
+- **[[judgement/index|Judgement]]** — hit windows, hold notes and input timing, following
+  osu!mania's lazer / ScoreV2 model.
 
 ## Repositories
 
